@@ -21,6 +21,7 @@
   "devDependencies": {
     "@types/express": "^5.0.0",
     "@types/node": "^22.9.4",
+    "@types/uuid": "^10.0.0",
     "openapi-typescript": "^7.4.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2"

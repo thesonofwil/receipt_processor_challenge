@@ -12,7 +12,7 @@ export type { Receipt } from "./models/Receipt";
 
 export { DefaultService } from "./services/DefaultService";
 
-import app from "./app";
+import app from "../app";
 
 const PORT = process.env.PORT || 3000;
 

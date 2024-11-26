@@ -1,12 +1,10 @@
 import { Router } from "express";
-import {
-  processReceipt,
-  getReceiptPoints,
-} from "../controllers/receiptController";
+import { ReceiptController } from "../controllers/receiptController";
 
 const router = Router();
+const receiptController = new ReceiptController();
 
-router.post("/process", processReceipt);
-router.get("/:id/points", getReceiptPoints);
+router.post("/process", receiptController.processReceipt);
+router.get("/:id/points", receiptController.getReceiptPoints);
 
 export { router as receiptRoutes };
