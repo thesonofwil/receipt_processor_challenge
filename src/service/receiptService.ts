@@ -1,4 +1,4 @@
-import { Receipt } from "../generated";
+import { Receipt } from "../generated/models/Receipt";
 import { v4 as uuidV4 } from "uuid";
 
 export class ReceiptService {
@@ -16,6 +16,7 @@ export class ReceiptService {
   public processReceipt(receipt: Receipt): string {
     // Generate a unique ID for the receipt
     const id = uuidV4();
+    // console.log("ID generated: ", id);
     this.receipts.set(id, receipt); // store the receipt with its assigned ID
 
     return id;
@@ -28,5 +29,11 @@ export class ReceiptService {
    */
   public getPointsFromReceipt(receiptId: string): number {
     return 0;
+  }
+
+  private printReceipts(): void {
+    for (const [key, value] of this.receipts) {
+      console.log(key, ":", value);
+    }
   }
 }

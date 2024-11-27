@@ -1,12 +1,16 @@
 import express, { Application } from "express";
 import bodyParser from "body-parser";
+import { receiptRoutes } from "./routes/receiptRoutes";
 
 const app: Application = express();
 
-app.use(bodyParser.json());
+app.use((req, res, next) => {
+  console.log(`Incoming request: ${req.method} ${req.url}`);
+  next();
+});
 
 // Add routes
-import { receiptRoutes } from "./routes/receiptRoutes";
-app.use("/receipts", receiptRoutes);
+app.use(bodyParser.json()); // Parses JSON request bodies
+app.use("/receipts", receiptRoutes); // base path
 
 export default app;

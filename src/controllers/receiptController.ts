@@ -15,22 +15,21 @@ export class ReceiptController {
    * @param req express request
    * @param res express response
    */
-  public processReceipt(req: Request, res: Response): void {
+  public processReceipt = (req: Request, res: Response): void => {
     try {
       const receipt = req.body;
-
-      // Delegate processing logic to the service
       const id = this.receiptService.processReceipt(receipt);
+      console.log("processReceipt: Receipt processed successfully, id:", id);
 
       res.status(HttpStatusCodes.OK).json({ id });
     } catch (error) {
+      console.log("Error: ", error);
       res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR);
     }
-  }
+  };
 
-  // TODO:
   // GET /receipts/{id}/points
-  public getReceiptPoints(req: Request, res: Response): void {
+  public getReceiptPoints = (req: Request, res: Response): void => {
     try {
       const receiptId = req.params.id;
 
@@ -41,5 +40,5 @@ export class ReceiptController {
     } catch (error) {
       res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR);
     }
-  }
+  };
 }
