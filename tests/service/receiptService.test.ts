@@ -1,5 +1,9 @@
 import { ReceiptService } from "../../src/service/receiptService";
 import { Receipt } from "../../src/generated/models/Receipt";
+import {
+  duplicateReceiptError,
+  receiptNotFoundError,
+} from "../../src/lib/errors";
 
 describe("ReceiptService", () => {
   let receiptService: ReceiptService;
@@ -111,7 +115,13 @@ describe("ReceiptService", () => {
     expect(id).toBeDefined();
     expect(typeof id).toBe("string");
     expect(() => receiptService.processReceipt(receiptInput)).toThrow(
-      "Receipt has already been posted"
+      duplicateReceiptError
+    );
+  });
+
+  it("Should not calculate points if receipt not found", () => {
+    expect(() => receiptService.getPointsFromReceipt("invalidId")).toThrow(
+      receiptNotFoundError
     );
   });
 });
