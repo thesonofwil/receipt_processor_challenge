@@ -33,6 +33,13 @@ export const receiptNotFoundError: ReceiptError = new ReceiptError(
 export function evaluateError(e: any): ReceiptError {
   if (e instanceof ReceiptError) {
     return e;
+  } else if (e instanceof Error) {
+    // Generic error if don't know what happened
+    return new ReceiptError(
+      e.message ?? "Unexpected error",
+      HttpStatusCodes.INTERNAL_SERVER_ERROR
+    );
+    // Default fallback
   } else {
     return genericError;
   }

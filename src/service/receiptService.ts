@@ -1,6 +1,10 @@
 import { Receipt } from "../generated/models/Receipt";
 import { v4 as uuidV4 } from "uuid";
-import { ReceiptError } from "../lib/errors";
+import {
+  duplicateReceiptError,
+  ReceiptError,
+  receiptNotFoundError,
+} from "../lib/errors";
 import _ from "lodash";
 import { StatusCodes as HttpStatusCodes } from "http-status-codes";
 
@@ -22,10 +26,7 @@ export class ReceiptService {
     if (
       receipts.some((existingReceipt) => _.isEqual(receipt, existingReceipt))
     ) {
-      throw new ReceiptError(
-        "Receipt has already been posted",
-        HttpStatusCodes.BAD_REQUEST
-      );
+      throw duplicateReceiptError;
     }
     // Generate a unique ID for the receipt
     const id = uuidV4();
@@ -45,7 +46,7 @@ export class ReceiptService {
     const receipt: Receipt | undefined = this.receipts.get(receiptId);
 
     if (!receipt) {
-      throw new ReceiptError("Receipt not found", HttpStatusCodes.NOT_FOUND);
+      throw receiptNotFoundError;
     }
 
     return this.calculatePoints(receipt);
