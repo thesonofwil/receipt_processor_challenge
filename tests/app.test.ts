@@ -2,7 +2,6 @@ import request from "supertest";
 import app from "../src/app";
 import { Receipt } from "../src/generated/models/Receipt";
 import { StatusCodes as HttpStatusCodes } from "http-status-codes";
-import { ReceiptController } from "../src/controllers/receiptController";
 import { ReceiptService } from "../src/service/receiptService";
 
 describe("Route Handling in app.ts", () => {

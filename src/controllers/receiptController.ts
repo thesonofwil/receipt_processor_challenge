@@ -28,7 +28,12 @@ export class ReceiptController {
     }
   };
 
-  // GET /receipts/{id}/points
+  /**
+   * GET /receipts/{id}/points
+   * Calculates and returns the points associated with a stored receipt
+   * @param req express request
+   * @param res express response
+   */
   public getReceiptPoints = (req: Request, res: Response): void => {
     try {
       const receiptId = req.params.id;

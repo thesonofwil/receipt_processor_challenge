@@ -16,9 +16,9 @@ export class ReceiptService {
   }
 
   /**
-   *
-   * @param receipt
-   * @returns
+   * Stores a receipt into in-memory structure
+   * @param receipt receipt to store
+   * @returns a unique generated ID for that receipt
    */
   public processReceipt(receipt: Receipt): string {
     // Check if the receipt is a duplicate of a previously recorded one
@@ -30,16 +30,15 @@ export class ReceiptService {
     }
     // Generate a unique ID for the receipt
     const id = uuidV4();
-    // console.log("ID generated: ", id);
     this.receipts.set(id, receipt); // store the receipt with its assigned ID
 
     return id;
   }
 
   /**
-   *
-   * @param receiptId
-   * @returns
+   * Gets the points earned from a receipt
+   * @param receiptId ID of receipt to check
+   * @returns points from the receipt
    */
   public getPointsFromReceipt(receiptId: string): number {
     // Check if receipt exists
@@ -52,6 +51,11 @@ export class ReceiptService {
     return this.calculatePoints(receipt);
   }
 
+  /**
+   * Calculates the points according to criteria for receipts
+   * @param receipt receipt to parse through
+   * @returns total points earned
+   */
   private calculatePoints(receipt: Receipt) {
     let points: number = 0;
 
@@ -103,6 +107,9 @@ export class ReceiptService {
     return points;
   }
 
+  /**
+   * Debug function to print the list of receipts
+   */
   private printReceipts(): void {
     for (const [key, value] of this.receipts) {
       console.log(key, ":", value);
