@@ -18,7 +18,7 @@ app.use(
   OpenApiValidator.middleware({
     apiSpec: path.join(__dirname, "../spec/api.yaml"),
     validateRequests: true,
-    validateResponses: true,
+    validateResponses: false,
   })
 );
 

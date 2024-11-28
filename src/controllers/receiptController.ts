@@ -20,7 +20,6 @@ export class ReceiptController {
     try {
       const receipt = req.body;
       const id = this.receiptService.processReceipt(receipt);
-      console.log("processReceipt: Receipt processed successfully, id:", id);
       res.status(HttpStatusCodes.OK).json({ id });
     } catch (e) {
       const error = evaluateError(e);
