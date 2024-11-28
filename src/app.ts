@@ -7,7 +7,6 @@ import path from "path";
 const app: Application = express();
 
 app.use((req, res, next) => {
-  console.log(`Incoming request: ${req.method} ${req.url}`);
   next();
 });
 
@@ -30,7 +29,6 @@ app.use(
     res: express.Response,
     next: express.NextFunction
   ) => {
-    // format error
     res.status(err.status || 400).json({
       message: err.message,
       errors: err.errors,

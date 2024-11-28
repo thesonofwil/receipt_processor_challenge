@@ -1,7 +1,6 @@
-import _, { create } from "lodash";
 import { ReceiptController } from "../../src/controllers/receiptController";
 import { Receipt } from "../../src/generated/models/Receipt";
-import { mockRequest, mockResponse } from "../lib/testHelper";
+import { mockRequest } from "../lib/testHelper";
 import { StatusCodes as HttpStatusCodes } from "http-status-codes";
 import { ReceiptService } from "../../src/service/receiptService";
 import { ReceiptError } from "../../src/lib/errors";
@@ -78,7 +77,7 @@ describe("ReceiptController", () => {
     });
   });
 
-  describe("/receipts/{id}/process", () => {
+  describe("/receipts/{id}/points", () => {
     describe("GET", () => {
       const spyGetPointsFromReceipt: jest.SpyInstance<number, [string]> =
         jest.spyOn(ReceiptService.prototype, "getPointsFromReceipt");
