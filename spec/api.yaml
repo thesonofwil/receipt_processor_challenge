@@ -77,12 +77,12 @@ components:
         purchaseDate:
           description: The date of the purchase printed on the receipt.
           type: string
-          format: date
+          pattern: "^(\\d{4})-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$" # YYYY-MM-DD
           example: "2022-01-01"
         purchaseTime:
           description: The time of the purchase printed on the receipt. 24-hour time expected.
           type: string
-          format: time
+          pattern: "^([01]\\d|2[0-3]):([0-5]\\d)$" # HH:MM
           example: "13:01"
         items:
           type: array
