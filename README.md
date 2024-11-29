@@ -1,6 +1,6 @@
 # Receipt Processor Challenge
 
-This is an implementation of [Fetch-Rewards Receipt Processor Challenge](https://github.com/fetch-rewards/receipt-processor-challenge). The application is developed in TypeScript using Node.js and Express, and can be run using Docker.
+This is an implementation of [Fetch-Rewards Receipt Processor Challenge](https://github.com/fetch-rewards/receipt-processor-challenge). The application is developed in TypeScript using Node.js and Express, and can be run using Docker. Unit tests are developed using [Jest](https://jestjs.io/).
 
 ## Endpoints
 
