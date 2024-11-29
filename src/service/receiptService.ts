@@ -4,6 +4,7 @@ import {
   duplicateReceiptError,
   ReceiptError,
   receiptNotFoundError,
+  receiptTotalMismatchError,
 } from "../lib/errors";
 import _ from "lodash";
 import { StatusCodes as HttpStatusCodes } from "http-status-codes";
@@ -21,13 +22,8 @@ export class ReceiptService {
    * @returns a unique generated ID for that receipt
    */
   public processReceipt(receipt: Receipt): string {
-    // Check if the receipt is a duplicate of a previously recorded one
-    const receipts = Array.from(this.receipts.values());
-    if (
-      receipts.some((existingReceipt) => _.isEqual(receipt, existingReceipt))
-    ) {
-      throw duplicateReceiptError;
-    }
+    this.validateReceipt(receipt);
+
     // Generate a unique ID for the receipt
     const id = uuidV4();
     this.receipts.set(id, receipt); // store the receipt with its assigned ID
@@ -49,6 +45,27 @@ export class ReceiptService {
     }
 
     return this.calculatePoints(receipt);
+  }
+
+  private validateReceipt(receipt: Receipt): void {
+    // Check if the receipt is a duplicate of a previously recorded one
+    const receipts = Array.from(this.receipts.values());
+    if (
+      receipts.some((existingReceipt) => _.isEqual(receipt, existingReceipt))
+    ) {
+      throw duplicateReceiptError;
+    }
+
+    // Check if the sum of prices matches the total
+    const sumOfPrices = receipt.items
+      .reduce((sum, item) => {
+        return sum + parseFloat(item.price);
+      }, 0)
+      .toFixed(2); // Ensure only 2 decimal points
+
+    if (sumOfPrices !== receipt.total) {
+      throw receiptTotalMismatchError;
+    }
   }
 
   /**

@@ -19,6 +19,11 @@ export const duplicateReceiptError: ReceiptError = new ReceiptError(
   HttpStatusCodes.BAD_REQUEST
 );
 
+export const receiptTotalMismatchError: ReceiptError = new ReceiptError(
+  "The sum of the prices of the items does not match with the total on the receipt",
+  HttpStatusCodes.BAD_REQUEST
+);
+
 export const receiptNotFoundError: ReceiptError = new ReceiptError(
   "Receipt not found",
   HttpStatusCodes.NOT_FOUND
